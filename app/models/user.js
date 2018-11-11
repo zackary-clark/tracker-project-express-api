@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 
+const Max = require('./max')
+const Bodyweight = require('./bodyweight')
+
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -10,7 +13,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  token: String
+  token: String,
+  maxes: [Max],
+  bodyweights: [Bodyweight]
 }, {
   timestamps: true,
   toObject: {

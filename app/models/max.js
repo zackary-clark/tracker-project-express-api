@@ -42,15 +42,15 @@ maxSchema.virtual('total').get(function() {
   }
 })
 
-maxSchema.virtual('total.kg').get(function() {
-  if (this.squat1RM.kg && this.bench1RM.kg && this.deadlift1RM.kg) {
-    return this.squat1RM.kg + this.bench1RM.kg + this.deadlift1RM.kg
+maxSchema.virtual('total_kg').get(function() {
+  if (this.squat1RM && this.bench1RM && this.deadlift1RM) {
+    return this.squat1RM_kg + this.bench1RM_kg + this.deadlift1RM_kg
   } else {
     return false
   }
 })
 
-maxSchema.virtual('squat1RM.kg')
+maxSchema.virtual('squat1RM_kg')
   .get(function() {
     return this.squat1RM ? toKG(this.squat1RM) : false
   })
@@ -58,7 +58,7 @@ maxSchema.virtual('squat1RM.kg')
     this.set( 'squat1RM', fromKG(weightInKG))
   })
 
-maxSchema.virtual('bench1RM.kg')
+maxSchema.virtual('bench1RM_kg')
   .get(function() {
     return this.bench1RM ? toKG(this.bench1RM) : false
   })
@@ -66,7 +66,7 @@ maxSchema.virtual('bench1RM.kg')
     this.set( 'bench1RM', fromKG(weightInKG))
   })
 
-  maxSchema.virtual('deadlift1RM.kg')
+  maxSchema.virtual('deadlift1RM_kg')
   .get(function() {
     return this.deadlift1RM ? toKG(this.deadlift1RM) : false
   })
@@ -74,7 +74,7 @@ maxSchema.virtual('bench1RM.kg')
     this.set( 'deadlift1RM', fromKG(weightInKG))
   })
 
-  maxSchema.virtual('press1RM.kg')
+  maxSchema.virtual('press1RM_kg')
   .get(function() {
     return this.press1RM ? toKG(this.press1RM) : false
   })
@@ -82,4 +82,4 @@ maxSchema.virtual('bench1RM.kg')
     this.set( 'press1RM', fromKG(weightInKG))
   })
 
-module.exports = mongoose.model('Max', maxSchema)
+module.exports = maxSchema

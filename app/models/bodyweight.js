@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const toKG = require('../../lib/round').toKG
 const fromKG = require('../../lib/round').fromKG
 
-const maxSchema = new mongoose.Schema({
+const bodyweightSchema = new mongoose.Schema({
     date: {
         type: Date,
         required: true
@@ -26,7 +26,7 @@ const maxSchema = new mongoose.Schema({
     }
 })
 
-maxSchema.virtual('bodyweight.kg')
+bodyweightSchema.virtual('bodyweight.kg')
     .get(function() {
         return toKG(this.bodyweight)
     })
@@ -34,4 +34,4 @@ maxSchema.virtual('bodyweight.kg')
         this.set( 'bodyweight', fromKG(weightInKG))
     })
 
-module.exports = mongoose.model('Bodyweight', bodyweightSchema)
+module.exports = bodyweightSchema

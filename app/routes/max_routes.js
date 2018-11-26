@@ -52,4 +52,25 @@ router.post('/maxes', requireToken, (req, res) => {
     })
 })
 
+// PATCH
+router.patch('/maxes/:id', requireToken, (req, res) => {
+    console.log(req.body.max)
+    User.findOneAndUpdate(
+        {
+            _id: ObjectId(req.user.id),
+            "maxes._id": ObjectId(req.params.id)
+        }, {
+            $set: {
+                "maxes.$": req.body.max
+            }
+        }, {
+            new: true,
+            fields: 'maxes',
+            projection: 'maxes'
+        },
+            (err, success) => {
+                err ? handle(err, res) : res.status(204).json({ max: success.maxes.slice(-1)[0] })
+    })
+})
+
 module.exports = router
